@@ -1,22 +1,17 @@
 import React from 'react';
 import './App.css';
+import { EmployeeList } from './components/employees/EmployeeList';
 
-const calculateData = (all = true) => {
-  let data = []
-  for (var i = 0; i < 100; i++) {
-    data.push( Math.random() )
-  }
-  if (!all){
-    data = data.filter(e => e > 0.5)
-  }
-  return data.reduce((sum, i) => sum + i)
-}
+import { getEmployees } from './data'
+const employees = getEmployees().slice(0, 25)
 
 function App({ all = true }) {
-  const sum = calculateData(all)
+  // const sum = calculateData(all)
+  const sum = 125
   return (
     <div className="App">
       elo: {sum}
+      <EmployeeList employees={employees} />
     </div>
   );
 }
