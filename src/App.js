@@ -1,24 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const calculateData = (all = true) => {
+  let data = []
+  for (var i = 0; i < 100; i++) {
+    data.push( Math.random() )
+  }
+  if (!all){
+    data = data.filter(e => e > 0.5)
+  }
+  return data.reduce((sum, i) => sum + i)
+}
+
+function App({ all = true }) {
+  let fn
+  const sum = calculateData()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      elo: {sum}
     </div>
   );
 }
