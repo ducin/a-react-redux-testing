@@ -13,8 +13,7 @@ const calculateData = (all = true) => {
 }
 
 function App({ all = true }) {
-  let fn
-  const sum = calculateData()
+  const sum = calculateData(all)
   return (
     <div className="App">
       elo: {sum}
