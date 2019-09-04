@@ -129,4 +129,61 @@ describe('Pagination', () => {
     })
 
   })
+
+  const toString = (obj) => JSON.stringify(obj)
+
+  describe('Callback gets invoked', () => {
+    [{
+      given: { currentPage: 7, pageCount: 15 },
+      actions: [{
+        when: { click: 6 },
+        then: [{ calledTimes: 1 }, { lastCalledWith: 6 }]
+      }]
+    }, {
+      given: { currentPage: 7, pageCount: 15 },
+      actions: [{
+        when: { click: 7 },
+        then: [{ calledTimes: 0 }]
+      }]
+    }, {
+      given: { currentPage: 1, pageCount: 15 },
+      actions: [{
+        when: { click: '<' },
+        then: [{ calledTimes: 0 }]
+      }, {
+        when: { click: '<<' },
+        then: [{ calledTimes: 0 }]
+      }, {
+        when: { click: '>' },
+        then: [{ calledTimes: 1 }, { lastCalledWith: 2 }]
+      }, {
+        when: { click: '>>' },
+        then: [{ calledTimes: 2 }, { lastCalledWith: 15 }]
+      }]
+    }, {
+      given: { currentPage: 15, pageCount: 15 },
+      actions: [{
+        when: { click: '>' },
+        then: [{ calledTimes: 0 }]
+      }, {
+        when: { click: '>>' },
+        then: [{ calledTimes: 0 }]
+      }, {
+        when: { click: '<' },
+        then: [{ calledTimes: 1 }, { lastCalledWith: 14 }]
+      }, {
+        when: { click: '<<' },
+        then: [{ calledTimes: 2 }, { lastCalledWith: 1 }]
+      }]
+    }].forEach(({ given: { currentPage, pageCount }, actions }) => {
+      it(`
+      given: current = ${currentPage}, pages = ${pageCount}
+      ${actions.map(({ when, then }) => `
+      when: ${ toString(when) }
+      then: ${ toString(then) }
+      `)}`, () => {
+        expect(2).toBe(4)
+      });
+    });
+  })
 })
