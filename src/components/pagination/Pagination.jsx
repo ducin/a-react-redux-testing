@@ -15,7 +15,7 @@ export const Pagination = ({
     if (currentPage !== page && page > 0 && page <= pageCount) {
       onChange(page)
     }
-  }, [currentPage])
+  }, [currentPage, pageCount, onChange])
 
   return <div>
 
