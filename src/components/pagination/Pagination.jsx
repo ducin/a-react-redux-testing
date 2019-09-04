@@ -5,11 +5,18 @@ const range = (max) =>
   [...Array(max)].map((_, idx) => idx + 1)
 
 export const Pagination = ({
-  currentPage, pageCount, displayArrows
+  currentPage, pageCount, displayArrows, onChange
 }) => {
   const pageNumbers = range(5)
     .map(p => p - 3 + currentPage)
     .filter(p => p >= 1 && p <= pageCount)
+
+  const onChangeHandler = (page) => {
+    if (currentPage !== page) {
+      onChange(page)
+    }
+  }
+
   return <div>
 
     {displayArrows && <>
@@ -24,7 +31,9 @@ export const Pagination = ({
 
     {pageNumbers.map(n => {
       const classes = 'page' + ((n === currentPage) ? ' selected' : '')
-      return <span key={n} className={classes}>{ n }</span>
+      return <span key={n} className={classes}
+        onClick={ () => onChangeHandler(n) }
+      >{ n }</span>
     }
     )}
 

@@ -96,10 +96,10 @@ import { Pagination } from './Pagination'
 const getBtnByLabel = (wrapper, label) => wrapper.find('.page')
   .filterWhere(node => node.text().trim() === label)
 
-describe('Pagination', () => {
+const getButtonLabels = wrapper => wrapper
+  .find('.page').map(w => w.text())
 
-  const getButtonLabels = wrapper => wrapper
-    .find('.page').map(w => w.text())
+describe('Pagination', () => {
 
   describe('Proper pages displayed', () => {
 
