@@ -714,6 +714,7 @@ exports[`should match snapshot 1`] = `
       <span
         className="page"
         disabled={true}
+        onClick={[Function]}
       >
          
         &lt;&lt;
@@ -722,33 +723,39 @@ exports[`should match snapshot 1`] = `
       <span
         className="page"
         disabled={true}
+        onClick={[Function]}
       >
          &lt; 
       </span>
       <span
         className="page selected"
+        onClick={[Function]}
       >
         1
       </span>
       <span
         className="page"
+        onClick={[Function]}
       >
         2
       </span>
       <span
         className="page"
+        onClick={[Function]}
       >
         3
       </span>
       <span
         className="page"
         disabled={false}
+        onClick={[Function]}
       >
          &gt; 
       </span>
       <span
         className="page"
         disabled={false}
+        onClick={[Function]}
       >
          
         &gt;&gt;

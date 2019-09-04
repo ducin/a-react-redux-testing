@@ -90,7 +90,7 @@ import React from 'react'
 
 */
 
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import { Pagination } from './Pagination'
 
 const getBtnByLabel = (wrapper, label) => wrapper.find('.page')
@@ -267,7 +267,7 @@ describe('Pagination', () => {
       then: ${ toString(then) }`
       ).join('\n') + '\n'}`, () => {
         const spy = jest.fn()
-        const wrapper = shallow(<Pagination {...given} onChange={spy} />)
+        const wrapper = mount(<Pagination {...given} onChange={spy} />)
 
         actions.forEach(({ when, then }) => {
           const btn = getBtnByLabel(wrapper, `${when.click}`)
@@ -282,8 +282,6 @@ describe('Pagination', () => {
             }
           })
         })
-
-        expect(2).toBe(2)
       });
     });
   })

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import './pagination.css'
 
 const range = (max) =>
@@ -11,21 +11,23 @@ export const Pagination = ({
     .map(p => p - 3 + currentPage)
     .filter(p => p >= 1 && p <= pageCount)
 
-  const onChangeHandler = (page) => {
-    if (currentPage !== page) {
+  const onChangeHandler = useCallback((page) => {
+    if (currentPage !== page && page > 0 && page <= pageCount) {
       onChange(page)
     }
-  }
+  }, [currentPage])
 
   return <div>
 
     {displayArrows && <>
       <span className="page"
         disabled={currentPage === 1}
+        onClick={ () => onChangeHandler(1) }
       > {"<<"} </span>
 
       <span className="page"
         disabled={currentPage === 1}
+        onClick={ () => onChangeHandler(currentPage - 1) }
       > &lt; </span>
     </>}
 
@@ -40,10 +42,12 @@ export const Pagination = ({
     {displayArrows && <>
       <span className="page"
         disabled={currentPage === pageCount}
+        onClick={ () => onChangeHandler(currentPage + 1) }
       > &gt; </span>
 
       <span className="page"
         disabled={currentPage === pageCount}
+        onClick={ () => onChangeHandler(pageCount) }
       > {">>"} </span>
     </>}
 
