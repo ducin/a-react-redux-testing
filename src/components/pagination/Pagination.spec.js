@@ -90,8 +90,43 @@ import React from 'react'
 
 */
 
+import { shallow } from 'enzyme'
+import { Pagination } from './Pagination'
+
 describe('Pagination', () => {
-  it('should ...', () => {
-    
+
+  const getButtonLabels = wrapper => wrapper
+    .find('.page').map(w => w.text())
+
+  describe('Proper pages displayed', () => {
+
+    [{
+      currentPage: 1, pageCount: 15, expectedDisplayed: ['1', '2', '3']
+    }, {
+      currentPage: 2, pageCount: 15, expectedDisplayed: ['1', '2', '3', '4']
+    }, {
+      currentPage: 3, pageCount: 15, expectedDisplayed: ['1', '2', '3', '4', '5']
+    }, {
+      currentPage: 15, pageCount: 15, expectedDisplayed: ['13', '14', '15']
+    }, {
+      currentPage: 14, pageCount: 15, expectedDisplayed: ['12', '13', '14', '15']
+    }, {
+      currentPage: 13, pageCount: 15, expectedDisplayed: ['11', '12', '13', '14', '15']
+    }].forEach(({ currentPage, pageCount, expectedDisplayed }) => {
+      it(`
+      given: current = ${currentPage}, pages = ${pageCount}
+      then: should display ${expectedDisplayed}`, () => {
+        const wrapper = shallow(<Pagination
+          currentPage={currentPage}
+          pageCount={pageCount} />)
+  
+  
+        
+  
+  
+        expect(getButtonLabels(wrapper)).toEqual(expectedDisplayed)
+      })
+    })
+
   })
 })
