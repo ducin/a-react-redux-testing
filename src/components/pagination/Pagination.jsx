@@ -4,15 +4,22 @@ const range = (max) =>
   [...Array(max)].map((_, idx) => idx + 1)
 
 export const Pagination = ({
-  currentPage, pageCount
+  currentPage, pageCount, displayArrows
 }) => {
   const pageNumbers = range(5)
     .map(p => p - 3 + currentPage)
     .filter(p => p >= 1 && p <= pageCount)
   return <div>
-    <span className="page"> {"<<"} </span>
 
-    <span className="page"> &lt; </span>
+    {displayArrows && <>
+      <span className="page"
+        disabled={currentPage === 1}
+      > {"<<"} </span>
+
+      <span className="page"
+        disabled={currentPage === 1}
+      > &lt; </span>
+    </>}
 
     {pageNumbers.map(n => {
       const classes = 'page' + ((n === currentPage) ? ' selected' : '')
@@ -20,9 +27,15 @@ export const Pagination = ({
     }
     )}
 
-    <span className="page"> &gt; </span>
+    {displayArrows && <>
+      <span className="page"
+        disabled={currentPage === pageCount}
+      > &gt; </span>
 
-    <span className="page"> {">>"} </span>
+      <span className="page"
+        disabled={currentPage === pageCount}
+      > {">>"} </span>
+    </>}
 
   </div>
 }

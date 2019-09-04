@@ -157,37 +157,52 @@ describe('Pagination', () => {
   describe('Disabled Buttons', () => {
     // current page always disabled
     [{
+      id: 'D.1',
       currentPage: 1, pageCount: 1,
+      enabled: [],
       disabled: ['<<', '<', '>', '>>'],
     }, {
+      id: 'D.2',
       currentPage: 1, pageCount: 15,
       enabled: ['>>', '>'],
       disabled: ['<', '<<'],
     }, {
+      id: 'D.3',
       currentPage: 2, pageCount: 15,
       enabled: ['<<', '<', '>', '>>'],
       disabled: [],
     }, {
+      id: 'D.4',
       currentPage: 14, pageCount: 15,
       enabled: ['<<', '<', '>', '>>'],
       disabled: [],
     }, {
+      id: 'D.5',
       currentPage: 15, pageCount: 15,
       enabled: ['<<', '<'],
       disabled: ['>', '>>'],
-    }].forEach(({ currentPage, pageCount, enabled, disabled }) => {
+    }].forEach(({ id, currentPage, pageCount, enabled, disabled }) => {
       it(`
+      TEST ${ id }:
       given: current = ${ currentPage }, pages = ${ pageCount }
       then: ${ enabled } should be enabled, ${ disabled } should be disabled`, () => {
         const wrapper = shallow(<Pagination
-          currentPage={1}
-          pageCount={15} />)
+          currentPage={currentPage}
+          pageCount={pageCount}
+          displayArrows={true} />)
 
         const getBtnByLabel = (wrapper, label) => wrapper.find('.page')
-          .filterWhere(node => node.text().includes(label))
+          .filterWhere(node => node.text().trim() === label)
   
         enabled.forEach(label => {
           const btn = getBtnByLabel(wrapper, label)
+          expect(btn).toHaveLength(1)
+          expect(btn.prop('disabled')).not.toBeTruthy()
+        })
+  
+        disabled.forEach(label => {
+          const btn = getBtnByLabel(wrapper, label)
+          expect(btn).toHaveLength(1)
           expect(btn.prop('disabled')).toBeTruthy()
         })
       })
