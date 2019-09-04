@@ -1,4 +1,5 @@
 import React from 'react'
+import './pagination.css'
 
 const range = (max) =>
   [...Array(max)].map((_, idx) => idx + 1)

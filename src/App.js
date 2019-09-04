@@ -3,7 +3,8 @@ import './App.css';
 import { EmployeeList } from './components/employees/EmployeeList';
 
 import { getEmployees } from './data'
-const employees = getEmployees().slice(0, 25)
+import { TableContainer } from './components/pagination/TableContainer';
+const employees = getEmployees().slice(0, 100)
 
 function App({ all = true }) {
   // const sum = calculateData(all)
@@ -12,6 +13,10 @@ function App({ all = true }) {
     <div className="App">
       elo: {sum}
       <EmployeeList employees={employees} />
+
+      <hr />
+
+      <TableContainer employees={employees} />
     </div>
   );
 }
