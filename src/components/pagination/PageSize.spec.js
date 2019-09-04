@@ -78,4 +78,21 @@ describe('PageSize', () => {
     // FILTERED OUT!
     expect(spy).toHaveBeenCalledTimes(2)
   })
+
+  it('should have initial size defined', () => {
+    const sizes = [10, 25, 50]
+    const wrapper = shallow(<PageSize
+      availableSizes={sizes}
+      initialSize={25} />)
+
+    expect(wrapper.find('.selected').text()).toContain('25')
+  })
+
+  it('should have default size defined', () => {
+    const sizes = [10, 25, 50]
+    const wrapper = shallow(<PageSize
+      availableSizes={sizes} />)
+
+    expect(wrapper.find('.selected').text()).toContain('10')
+  })
 })
