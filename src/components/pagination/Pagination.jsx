@@ -10,8 +10,10 @@ export const Pagination = ({
     .map(p => p - 3 + currentPage)
     .filter(p => p >= 1 && p <= pageCount)
   return <div>
-    {pageNumbers.map(n =>
-      <span key={n} className="page">{ n }</span>
-    )}
+    {pageNumbers.map(n => {
+      const classes = 'page' + ((n === currentPage) ? ' selected' : '')
+      return <span key={n} className={classes}>{ n }</span>
+    }
+  )}
   </div>
 }
