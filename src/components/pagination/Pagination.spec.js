@@ -394,18 +394,25 @@ describe('Pagination', () => {
     })
 
     it(`TEST: CPC.2
-      given: pages = 15, curent = 7
+      given: pages = 8, curent = 7
       when: click ">>"
-      then: current = 15
+      then: current = 8
       when: resize pages = 25
       then: current = 1
       `, () => {
         const wrapper = shallow(<Pagination
           currentPage={7}
-          pageCount={15}
-          displayArrows={false} />)
-        const { getSelected } = paginationFacade(wrapper)
-        
+          pageCount={8}
+          displayArrows={true}
+          onChange={() => {}} />)
+        const { getSelected, clickLabel } = paginationFacade(wrapper)
+
+        clickLabel('>>')
+        wrapper.setProps({ currentPage: 8 })
+        expect(getSelected()).toContain('8')
+
+        wrapper.setProps({ pageCount: 25 })
+        expect(getSelected()).toContain('1')
       })
   })
 
