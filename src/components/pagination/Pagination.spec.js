@@ -380,7 +380,9 @@ describe('Pagination', () => {
 
   describe('Changing Page Count', () => {
     it(`TEST: CPC.1
-      should resize to 25 pages and reset current page to 1`, () => {
+      given: pages = 15, curent = 7
+      when: resize pages = 25
+      then: should resize to 25 pages and reset current page to 1`, () => {
       const wrapper = shallow(<Pagination
         currentPage={7}
         pageCount={15}
@@ -390,6 +392,21 @@ describe('Pagination', () => {
       wrapper.setProps({ pageCount: 25 })
       expect(getSelected()).toContain('1')
     })
+
+    it(`TEST: CPC.2
+      given: pages = 15, curent = 7
+      when: click ">>"
+      then: current = 15
+      when: resize pages = 25
+      then: current = 1
+      `, () => {
+        const wrapper = shallow(<Pagination
+          currentPage={7}
+          pageCount={15}
+          displayArrows={false} />)
+        const { getSelected } = paginationFacade(wrapper)
+        
+      })
   })
 
 })
