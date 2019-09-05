@@ -17,38 +17,38 @@ export const Pagination = ({
     }
   }, [currentPage, pageCount, onChange])
 
-  return <div>
+  return <div className="pagination">
 
     {displayArrows && <>
-      <span className="page"
+      <button className="page"
         disabled={currentPage === 1}
         onClick={ () => onChangeHandler(1) }
-      > {"<<"} </span>
+      > {"<<"} </button>
 
-      <span className="page"
+      <button className="page"
         disabled={currentPage === 1}
         onClick={ () => onChangeHandler(currentPage - 1) }
-      > &lt; </span>
+      > &lt; </button>
     </>}
 
     {pageNumbers.map(n => {
       const classes = 'page' + ((n === currentPage) ? ' selected' : '')
-      return <span key={n} className={classes}
+      return <button key={n} className={classes}
         onClick={ () => onChangeHandler(n) }
-      >{ n }</span>
+      >{ n }</button>
     }
     )}
 
     {displayArrows && <>
-      <span className="page"
+      <button className="page"
         disabled={currentPage === pageCount}
         onClick={ () => onChangeHandler(currentPage + 1) }
-      > &gt; </span>
+      > &gt; </button>
 
-      <span className="page"
+      <button className="page"
         disabled={currentPage === pageCount}
         onClick={ () => onChangeHandler(pageCount) }
-      > {">>"} </span>
+      > {">>"} </button>
     </>}
 
   </div>
