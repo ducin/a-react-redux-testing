@@ -389,7 +389,7 @@ describe('Pagination', () => {
         displayArrows={false} />)
       const { getSelected } = paginationFacade(wrapper)
 
-      wrapper.setProps({ pageCount: 25 })
+      wrapper.setProps({ pageCount: 25, currentPage: 1 })
       expect(getSelected()).toContain('1')
     })
 
@@ -411,7 +411,7 @@ describe('Pagination', () => {
         wrapper.setProps({ currentPage: 8 })
         expect(getSelected()).toContain('8')
 
-        wrapper.setProps({ pageCount: 25 })
+        wrapper.setProps({ pageCount: 25, currentPage: 1 })
         expect(getSelected()).toContain('1')
       })
   })
