@@ -7,6 +7,15 @@ import { Pagination } from './Pagination';
 // data -> this.props.data
 export class TableContainer extends React.Component {
 
+  // filterVisibleItems(){
+  //   return this.props.employees
+  //     .filter(x => x) // this.state.pageSize
+  //     .filter(x => x) // this.state.currentPage
+  //     .filter(x => x) // this.state.filters
+  // }
+
+  // defualt size always 10
+  // hardcoded
   availableSizes = [10, 20, 30]
 
   // availableSizes, onChange
