@@ -377,4 +377,19 @@ describe('Pagination', () => {
       expect(getButtonLabels()).toEqual(['<<', '<', '12', '13', '14', '15', '>', '>>'])
     })
   })
+
+  describe('Changing Page Count', () => {
+    it(`TEST: CPC.1
+      should resize to 25 pages and reset current page to 1`, () => {
+      const wrapper = shallow(<Pagination
+        currentPage={7}
+        pageCount={15}
+        displayArrows={false} />)
+      const { getSelected } = paginationFacade(wrapper)
+
+      wrapper.setProps({ pageCount: 25 })
+      expect(getSelected()).toContain('1')
+    })
+  })
+
 })
